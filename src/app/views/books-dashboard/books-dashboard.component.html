@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-chart-book
+        [labels]="labelsDateBooks"
+        [data]="dataBooks"
+        (onChangedLabelData)="onChangeCharts($event)"
+        class="charts-wrap"
+      ></app-chart-book>
+    </div>
+    <div *ngFor="let book of filterBooks()" class="col-md-6 mt-3">
+      <div class="card">
+        <div
+          class="card-img-top card-img-top--book"
+          (click)="transitionToBook($event, book)"
+        ></div>
+        <div class="card-body">
+          <h5 class="card-title">{{ book.Title }}</h5>
+          <p class="card-text">Description: {{ book.Description }}</p>
+          <p class="card-text">
+            Publication Date:
+            {{ book.PublishDate | date: 'medium' }}
+          </p>
+          <ng-template [ngIf]="showAuthor">
+            <div *ngFor="let author of currentBookAuthors(book.ID)">
+              <p>Author name: {{ author.FirstName }}</p>
+              <p>Author last name: {{ author.LastName }}</p>
+            </div>
+          </ng-template>
+          <button class="btn btn-primary" (click)="showAuthor = !showAuthor">
+            Author
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 d-flex flex-column flex-sm-row mt-5">
+      <div class="pagination-wrap">
+        <ngb-pagination
+          size="sm"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          [collectionSize]="booksLength"
+          [maxSize]="maxSize"
+          [rotate]="true"
+          [ellipses]="true"
+          [boundaryLinks]="true"
+        ></ngb-pagination>
+      </div>
+      <div class="drop-down-wrap ml-3" ngbDropdown>
+        <button
+          class="btn btn-outline-primary"
+          id="dropdownConfig"
+          ngbDropdownToggle
+        >
+          {{ pageSize }}
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownConfig">
+          <button
+            ngbDropdownItem
+            *ngFor="let pageSize of pageSizes"
+            (click)="changePageSize(pageSize)"
+          >
+            {{ pageSize }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

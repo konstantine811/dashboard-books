@@ -1,0 +1,17 @@
+<canvas id="lineChart"></canvas>
+<div class="d-flex justify-content-center">
+  <button
+    class="btn btn-light"
+    [ngClass]="{ active: status === 'months' }"
+    (click)="changeLabelData('months')"
+  >
+    Months
+  </button>
+  <button
+    class="btn btn-light"
+    [ngClass]="{ active: status === 'years' }"
+    (click)="changeLabelData('years')"
+  >
+    Years
+  </button>
+</div>

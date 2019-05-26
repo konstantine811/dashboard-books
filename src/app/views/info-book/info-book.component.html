@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mt-3">
+      <div class="card">
+        <div class="card-img-top card-img-top--book"></div>
+        <div class="card-body">
+          <h5 class="card-title">{{ infoBooks.Title }}</h5>
+          <p class="card-text">Description: {{ infoBooks.Description }}</p>
+          <p class="card-text">Excerpt: {{ infoBooks.Excerpt }}</p>
+          <p class="card-text">PageCount: {{ infoBooks.PageCount }}</p>
+          <p class="card-text">
+            Publication Date:
+            {{ infoBooks.PublishDate | date: 'medium' }}
+          </p>
+          <a [routerLink]="['']" class="btn btn-primary">Book Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
